@@ -102,53 +102,44 @@ This signifies that the runtime grows exactly at the rate of \(n^2\) in both the
 
 ---
 
-**Function Example:**
-
-```matlab
-function x = f(n)
-    x = 1;
-    for i = 1:n
-        for j = 1:n
-            x = x + 1;
-
-
 ### Result
-- **Big-O (Upper Bound)**: \(O(n^2)\)
-- **Big-Omega (Lower Bound)**: \(Ω(n^2)\)
-- **Big-Theta (Tight Bound)**: \(Θ(n^2)\)
+- **Big-O (Upper Bound)**: $O(n^2)$
+- **Big-Omega (Lower Bound)**: $\Omega(n^2)$
+- **Big-Theta (Tight Bound)**: $\Theta(n^2)$
+
 ### Plot
-![Figure_2](https://github.com/user-attachments/assets/c316624d-c629-48f6-818d-99d39e8f8973)
+![Figure_2](tc_analysis.png)
 
 
 This analysis confirms that the time complexity of the algorithm is quadratic, and the runtime grows proportionally to \(n^2\) in all cases.
 
 ## 4. Determining n0
-![n0](https://github.com/user-attachments/assets/5c792a8c-a105-4401-b803-ae073f31ab55)
+![n0](tc_analysis_zoomed.png)
 
-## Questions 4 and 5: Effect of the Modification on Runtime and Results
 
 ### 4. Will This Increase How Long It Takes the Algorithm to Run (e.g., timing the function like in #2)?
 
-Yes, I found that the modified function slightly increases the runtime because of the newly introduced operation `y = i + j` inside the inner loop. However, this operation is a **constant-time operation** `O(1)`, so while it adds some overhead to each iteration of the loop, it **does not affect the overall time complexity** of the algorithm. The nested loops still run `n^2` times, so the time complexity remains:
+Yes, introducing the operation `y = i + j` within the inner loop results in a slight increase in runtime. This is because `y = i + j` is a constant-time operation $O(1)$, which adds a small overhead for each iteration.
 
-\[
-T(n) = O(n^2)
-\]
+Despite this additional operation, it does not change the algorithm’s overall time complexity. The nested loops continue to execute $n^2$ times, keeping the time complexity at:
+
+$$ T(n) = O(n^2) $$
 
 In conclusion:
-- **Yes**, it increases the runtime slightly due to the additional operation, but the growth rate remains quadratic.
+- **Yes**, the runtime is slightly affected by the new operation, but the overall growth rate remains quadratic.
 
 ---
 
 ### 5. Will It Affect Your Results from #1?
 
-No, the results from Question 1 remain unchanged. In Question 1, I determined the time complexity to be **O(n²)** because of the two nested loops, each iterating `n` times. The new operation `y = i + j` is a **constant-time** operation `O(1)`, so while it adds some work inside each iteration, it does not change the overall growth rate of the function. Therefore, the time complexity is still `O(n^2)`, and the results from Question 1 are still valid.
+No, the modification does not alter the results from Question 1. In Question 1, we established that the time complexity was $O(n²)$ due to the two nested loops, each running n times. The addition of the operation `y = i + j`, which is a constant-time operation $O(1)$, introduces only a minor overhead in each iteration but does not affect the overall growth rate of the function.
 
 In conclusion:
-- **No**, this modification does not affect the results from Question 1, as the time complexity remains **O(n²)**.
+- **No**, the modification does not impact the results from Question 1, as the time complexity remains $O(n²)$.
+
 
 ## 6. Merge Sort Implementation
-Here, I implemented the Merge Sort algorithm to sort the provided array.
+Here is my implementation of Merge Sort. Run `python merge_sort.py` for more details.
 
 ```python
 def merge_sort(arr):
