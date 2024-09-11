@@ -142,43 +142,59 @@ In conclusion:
 Here is my implementation of Merge Sort. Run `python merge_sort.py` for more details.
 
 ```python
-def merge_sort(arr):
-    if len(arr) > 1:
-        mid = len(arr) // 2  # Finding the middle of the array
-        left_half = arr[:mid]  # Dividing the array elements into 2 halves
-        right_half = arr[mid:]
-
-        merge_sort(left_half)  # Sorting the first half
-        merge_sort(right_half)  # Sorting the second half
-
-        i = j = k = 0
-
-        # Merge the sorted halves
-        while i < len(left_half) and j < len(right_half):
-            if left_half[i] < right_half[j]:
-                arr[k] = left_half[i]
-                i += 1
-            else:
-                arr[k] = right_half[j]
-                j += 1
-            k += 1
-
-        # Checking if any element was left in the left_half
-        while i < len(left_half):
-            arr[k] = left_half[i]
+def merge(arr, l, m, r):
+    n1 = m - l + 1
+    n2 = r - m
+ 
+    L = [0] * (n1)
+    R = [0] * (n2)
+ 
+    for i in range(0, n1):
+        L[i] = arr[l + i]
+ 
+    for j in range(0, n2):
+        R[j] = arr[m + 1 + j]
+ 
+    i = 0     
+    j = 0     
+    k = l 
+ 
+    while i < n1 and j < n2:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
             i += 1
-            k += 1
-
-        # Checking if any element was left in the right_half
-        while j < len(right_half):
-            arr[k] = right_half[j]
+        else:
+            arr[k] = R[j]
             j += 1
-            k += 1
-
-# I tested the Merge Sort on the provided array
+        k += 1
+ 
+    while i < n1:
+        arr[k] = L[i]
+        i += 1
+        k += 1
+ 
+    while j < n2:
+        arr[k] = R[j]
+        j += 1
+        k += 1
+ 
+ 
+def mergeSort(arr, l, r):
+    if l < r:
+ 
+        m = l+(r-l)//2
+ 
+        mergeSort(arr, l, m)
+        mergeSort(arr, m+1, r)
+        merge(arr, l, m, r)
+ 
+ 
+# test the mergesort function
 arr = [5, 2, 4, 7, 1, 3, 2, 6]
-print("Original array:", arr)
-merge_sort(arr)
-print("Sorted array:", arr)
+n = len(arr)
+print(f"Original Array: {arr}")
+ 
+mergeSort(arr, 0, n-1)
+print(f"\n\nSorted array is: {arr}")
 ```
 
